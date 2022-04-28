@@ -218,7 +218,7 @@ public class ManageItemsFormController {
 
     private String generateNewId() {
         try {
-            new ItemDAOImpl().generateItemCode();
+            return new ItemDAOImpl().generateItemCode();
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
