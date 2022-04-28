@@ -206,6 +206,8 @@ public class ManageCustomersFormController {
 
         return new CustomerDAOImpl().customerIsExist(id);
 
+        /* This is a comment */
+
     }
 
 
