@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import db.DBConnection;
 import javafx.application.Platform;
@@ -50,6 +51,7 @@ public class ManageCustomersFormController {
         initUI();
 
         tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("asasa");
             btnDelete.setDisable(newValue == null);
             btnSave.setText(newValue != null ? "Update" : "Save");
             btnSave.setDisable(newValue == null);
@@ -74,7 +76,9 @@ public class ManageCustomersFormController {
         /*Get all customers*/
         try {
 
-            CustomerDAOImpl dao = new CustomerDAOImpl();
+            // Tight coupling
+            // No Dependency Injection
+            CustomerDAO dao = new CustomerDAOImpl();
             ArrayList<CustomerDTO> allCustomers = dao.getAllCustomers();
 
             for (CustomerDTO c : allCustomers) {
@@ -87,8 +91,6 @@ public class ManageCustomersFormController {
         } catch (ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-
-
     }
 
     private void initUI() {
@@ -145,14 +147,14 @@ public class ManageCustomersFormController {
         }
 
         if (btnSave.getText().equalsIgnoreCase("save")) {
-            /*Save Customer*/
+            //Save Customer
             try {
                 if (existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
 
                 CustomerDTO tm = new CustomerDTO(id,name,address);
-                CustomerDAOImpl dao = new CustomerDAOImpl();
+                CustomerDAO dao = new CustomerDAOImpl();
                 boolean isSaved = dao.saveCustomer(tm);
 
                 if(isSaved){
@@ -167,13 +169,13 @@ public class ManageCustomersFormController {
 
 
         } else {
-            /*Update customer*/
+            //Update customer
             try {
                 if (!existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
                 CustomerDTO dto = new CustomerDTO(id,name,address);
-                CustomerDAOImpl dao = new CustomerDAOImpl();
+                CustomerDAO dao = new CustomerDAOImpl();
                 dao.updateCustomer(dto);
 
             } catch (SQLException e) {
@@ -189,6 +191,18 @@ public class ManageCustomersFormController {
         }
 
         btnAddNewCustomer.fire();
+
+        /*String id = getLastCustomerId();
+        System.out.println("Old Id : "+id);
+        // id = C00-001
+        String[] ar = id.split("-");
+        int i = Integer.parseInt(ar[1]);
+        i++;
+        String finalId=null;
+        if(i<10){
+            finalId = "C00-00" + i;
+        }
+        System.out.println("New Id : "+finalId);*/
     }
 
 
@@ -207,7 +221,7 @@ public class ManageCustomersFormController {
             if (!existCustomer(id)) {
                 new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
             }
-            CustomerDAOImpl dao = new CustomerDAOImpl();
+            CustomerDAO dao = new CustomerDAOImpl();
             dao.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
@@ -223,7 +237,8 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-            return new CustomerDAOImpl().generateNewId();
+            CustomerDAO dao = new CustomerDAOImpl();
+            return dao.generateNewId();
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();

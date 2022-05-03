@@ -7,7 +7,7 @@ import view.tdm.CustomerTM;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class CustomerDAOImpl {   //Impl - Implementation
+public class CustomerDAOImpl implements CustomerDAO{   //Impl - Implementation
     public ArrayList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stm = connection.createStatement();
