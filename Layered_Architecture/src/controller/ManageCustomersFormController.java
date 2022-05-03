@@ -80,7 +80,6 @@ public class ManageCustomersFormController {
         try {
 
             // Tight coupling
-            // No Dependency Injection
             ArrayList<CustomerDTO> allCustomers = dao.getAllCustomers();
 
             for (CustomerDTO c : allCustomers) {
