@@ -23,7 +23,6 @@ public class CustomerDAOImpl implements CustomerDAO{   //Impl - Implementation
     }
 
     public boolean saveCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
         return SQLUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",dto.getId(),dto.getName(),dto.getAddress());
     }
 
@@ -61,6 +60,4 @@ public class CustomerDAOImpl implements CustomerDAO{   //Impl - Implementation
         }
         return null;
     }
-
-
 }

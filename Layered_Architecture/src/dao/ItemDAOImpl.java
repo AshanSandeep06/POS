@@ -63,7 +63,7 @@ public class ItemDAOImpl implements ItemDAO{
         return null;
     }
 
-    public ItemDTO findItemDAO(String code) throws SQLException, ClassNotFoundException {
+    public ItemDTO findItem(String code) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.executeQuery("SELECT * FROM Item WHERE code=?", code);
         if(resultSet.next()){
             return new ItemDTO(
