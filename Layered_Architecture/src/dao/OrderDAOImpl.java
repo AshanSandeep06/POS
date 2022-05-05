@@ -3,14 +3,58 @@ package dao;
 import db.DBConnection;
 import model.CustomerDTO;
 import model.ItemDTO;
+import model.OrderDTO;
 import model.OrderDetailDTO;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDAOImpl implements OrderDAO{
-    public String generateNewOrderId() throws SQLException, ClassNotFoundException {
+public class OrderDAOImpl implements CrudDAO<OrderDTO,String>{
+    @Override
+    public ArrayList<OrderDTO> getAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean save(OrderDTO dto) throws SQLException, ClassNotFoundException {
+        return SQLUtil.executeUpdate("INSERT INTO Orders (id, date, customerId) VALUES (?,?,?)", dto.getOrderId(),dto.getOrderDate(),dto.getCustomerId());
+    }
+
+    @Override
+    public boolean update(OrderDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String generateNewId() throws SQLException, ClassNotFoundException {
+        ResultSet result = SQLUtil.executeQuery("SELECT id FROM Orders ORDER BY id DESC LIMIT 1");
+        if (result.next()) {
+            return result.getString(1);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean IsExist(String id) throws SQLException, ClassNotFoundException {
+        return SQLUtil.executeQuery("SELECT id FROM Orders WHERE id=?",id).next();
+    }
+
+    @Override
+    public OrderDTO search(String s) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+
+
+    /*public String generateNewOrderId() throws SQLException, ClassNotFoundException {
         ResultSet result = SQLUtil.executeQuery("SELECT id FROM Orders ORDER BY id DESC LIMIT 1");
         if (result.next()) {
             return result.getString(1);
@@ -20,11 +64,11 @@ public class OrderDAOImpl implements OrderDAO{
     }
 
     public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException, ClassNotFoundException {
-        /*Transaction*/
+        *//*Transaction*//*
         Connection connection = null;
         connection = DBConnection.getDbConnection().getConnection();
         ResultSet result = SQLUtil.executeQuery("SELECT id FROM Orders WHERE id=?",orderId);
-        /*if order id already exist*/
+        *//*if order id already exist*//*
         if (result.next()) {
 
         }
@@ -63,5 +107,5 @@ public class OrderDAOImpl implements OrderDAO{
         connection.commit();
         connection.setAutoCommit(true);
         return true;
-    }
+    }*/
 }
