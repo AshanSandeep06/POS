@@ -7,7 +7,7 @@ import view.tdm.CustomerTM;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String>{
+public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String>,CustomerDAO{
     @Override
     public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.executeQuery("SELECT * FROM Customer");
@@ -66,6 +66,16 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String>{
             );
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<CustomerDTO> getCustomersUsingAddress() throws SQLException, ClassNotFoundException {
+        ArrayList<CustomerDTO> customerArray = new ArrayList<>();
+        ResultSet result = SQLUtil.executeQuery("SELECT * FROM Customer WHERE address LIKE 'G%'");
+        while (result.next()){
+            customerArray.add(new CustomerDTO(result.getString(1),result.getString(1),result.getString(1)));
+        }
+        return customerArray;
     }
 
     //Impl - Implementation
