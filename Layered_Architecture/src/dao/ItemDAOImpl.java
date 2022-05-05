@@ -7,7 +7,7 @@ import model.ItemDTO;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements CrudDAO<ItemDTO,String>{
+public class ItemDAOImpl implements CrudDAO<ItemDTO,String>,ItemDAO{
     @Override
     public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.executeQuery("SELECT * FROM Item");
@@ -68,6 +68,16 @@ public class ItemDAOImpl implements CrudDAO<ItemDTO,String>{
             );
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<ItemDTO> getItemsConsideringQtyOnHand() throws SQLException, ClassNotFoundException {
+        ResultSet result = SQLUtil.executeQuery("SELECT * FROM Item WHERE qtyOnHand>=200");
+        ArrayList<ItemDTO> itemArray = new ArrayList<>();
+        while(result.next()){
+            itemArray.add(new ItemDTO(result.getString(1),result.getString(2),result.getBigDecimal(3),result.getInt(4)));
+        }
+        return itemArray;
     }
 
     /*public ArrayList<ItemDTO> loadAllItems() throws SQLException, ClassNotFoundException {
