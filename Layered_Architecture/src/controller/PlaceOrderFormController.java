@@ -56,16 +56,16 @@ public class PlaceOrderFormController {
     private String orderId;
 
     // Property Injection-01
-    CrudDAO<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
+    CustomerDAO customerDAO = new CustomerDAOImpl();
 
     // Property Injection-02
-    CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+    ItemDAO itemDAO = new ItemDAOImpl();
 
     // Property Injection-03
-    CrudDAO<OrderDTO,String> orderDAO = new OrderDAOImpl();
+    OrderDAO orderDAO = new OrderDAOImpl();
 
     // Property Injection-04
-    CrudDAO<OrderDetailDTO,String> orderDetailDAO = new OrderDetailDAOImpl();
+    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
 
     public void initialize() throws SQLException, ClassNotFoundException {
 

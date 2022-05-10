@@ -1,17 +1,13 @@
-package dao;
+package dao.custom.impl;
 
-import db.DBConnection;
-import model.CustomerDTO;
-import model.ItemDTO;
+import dao.CrudDAO;
+import dao.custom.OrderDAO;
 import model.OrderDTO;
-import model.OrderDetailDTO;
 
-import java.sql.*;
-import java.time.LocalDate;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class OrderDAOImpl implements OrderDAO{
+public class OrderDAOImpl implements OrderDAO {
     @Override
     public ArrayList<OrderDTO> getAll() throws SQLException, ClassNotFoundException {
         return null;

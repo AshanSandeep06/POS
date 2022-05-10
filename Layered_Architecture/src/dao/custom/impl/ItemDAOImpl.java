@@ -1,13 +1,12 @@
-package dao;
+package dao.custom.impl;
 
-import db.DBConnection;
-import model.CustomerDTO;
+import dao.custom.ItemDAO;
 import model.ItemDTO;
 
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements ItemDAO{
+public class ItemDAOImpl implements ItemDAO {
     @Override
     public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
         return null;
@@ -40,6 +39,11 @@ public class ItemDAOImpl implements ItemDAO{
 
     @Override
     public ItemDTO search(String s) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ItemDTO> getAllItemsOnQtyOnHand(int qtyOnHand) {
         return null;
     }
 

@@ -1,56 +1,15 @@
-package dao;
+package dao.custom.impl;
 
-import db.DBConnection;
+import dao.SQLUtil;
+import dao.custom.CustomerDAO;
 import model.CustomerDTO;
-import view.tdm.CustomerTM;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerDAOImpl implements CustomerDAO{
+public class CustomerDAOImpl implements CustomerDAO {
     @Override
-    public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
-    public boolean save(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-    @Override
-    public boolean update(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-    @Override
-    public boolean delete(String s) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-    @Override
-    public String generateNewId() throws SQLException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
-    public boolean IsExist(String s) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-    @Override
-    public CustomerDTO search(String s) throws SQLException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
-    public ArrayList<CustomerDTO> getAllCustomersByAddress(String address) throws SQLException, ClassNotFoundException {
-        return null;
-    }
-
-
-
-   /* @Override
     public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.executeQuery("SELECT * FROM Customer");
         ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
@@ -108,7 +67,12 @@ public class CustomerDAOImpl implements CustomerDAO{
             );
         }
         return null;
-    }*/
+    }
+
+    @Override
+    public ArrayList<CustomerDTO> getAllCustomersByAddress(String address) throws SQLException, ClassNotFoundException {
+        return null;
+    }
 
     //Impl - Implementation
    /* public ArrayList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
