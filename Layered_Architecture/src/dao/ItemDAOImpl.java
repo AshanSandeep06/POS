@@ -7,8 +7,44 @@ import model.ItemDTO;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements CrudDAO<ItemDTO,String>,ItemDAO{
+public class ItemDAOImpl implements ItemDAO{
     @Override
+    public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean save(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String generateNewId() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean IsExist(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public ItemDTO search(String s) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+
+    /*@Override
     public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.executeQuery("SELECT * FROM Item");
         ArrayList<ItemDTO> allItems = new ArrayList<>();
@@ -78,7 +114,7 @@ public class ItemDAOImpl implements CrudDAO<ItemDTO,String>,ItemDAO{
             itemArray.add(new ItemDTO(result.getString(1),result.getString(2),result.getBigDecimal(3),result.getInt(4)));
         }
         return itemArray;
-    }
+    }*/
 
     /*public ArrayList<ItemDTO> loadAllItems() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.executeQuery("SELECT * FROM Item");

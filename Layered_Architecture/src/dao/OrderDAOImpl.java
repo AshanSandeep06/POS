@@ -11,8 +11,44 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDAOImpl implements CrudDAO<OrderDTO,String>{
+public class OrderDAOImpl implements OrderDAO{
     @Override
+    public ArrayList<OrderDTO> getAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean save(OrderDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(OrderDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String generateNewId() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean IsExist(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public OrderDTO search(String s) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+
+    /*@Override
     public ArrayList<OrderDTO> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
@@ -50,7 +86,7 @@ public class OrderDAOImpl implements CrudDAO<OrderDTO,String>{
     @Override
     public OrderDTO search(String s) throws SQLException, ClassNotFoundException {
         return null;
-    }
+    }*/
 
 
 

@@ -5,6 +5,7 @@ import model.CustomerDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface CustomerDAO {
-    ArrayList<CustomerDTO> getCustomersUsingAddress() throws SQLException, ClassNotFoundException;
+// CustomerDAO interface - This interface is used for customer table unique methods
+public interface CustomerDAO extends CrudDAO<CustomerDTO,String>{
+    ArrayList<CustomerDTO> getAllCustomersByAddress(String address) throws SQLException,ClassNotFoundException;
 }

@@ -5,6 +5,6 @@ import model.ItemDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface ItemDAO {
-    ArrayList<ItemDTO> getItemsConsideringQtyOnHand() throws SQLException,ClassNotFoundException;
+public interface ItemDAO extends CrudDAO<ItemDTO,String>{
+
 }
