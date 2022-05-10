@@ -1,5 +1,7 @@
 package controller;
 
+import bo.CustomerBO;
+import bo.CustomerBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import dao.custom.CustomerDAO;
@@ -41,8 +43,7 @@ public class ManageCustomersFormController {
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
 
-    // Property Injection(Dependency injection method)
-    CustomerDAO dao = new CustomerDAOImpl();  // Like an instance member of this class
+    CustomerBO customerBO = new CustomerBOImpl();
 
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -76,8 +77,7 @@ public class ManageCustomersFormController {
         /*Get all customers*/
         try {
 
-            // Tight coupling
-            ArrayList<CustomerDTO> allCustomers = dao.getAll();
+          ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomers();
 
             for (CustomerDTO c : allCustomers) {
                 tblCustomers.getItems().add(new CustomerTM(c.getId(), c.getName(), c.getAddress()));
@@ -152,7 +152,9 @@ public class ManageCustomersFormController {
                 }
 
                 CustomerDTO tm = new CustomerDTO(id, name, address);
-                boolean isSaved = dao.save(tm);
+
+
+                boolean isSaved = customerBO.saveCustomer(tm);
 
                 if (isSaved) {
                     tblCustomers.getItems().add(new CustomerTM(tm.getId(), tm.getName(), tm.getAddress()));
@@ -171,8 +173,9 @@ public class ManageCustomersFormController {
                 if (!existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
+
                 CustomerDTO dto = new CustomerDTO(id, name, address);
-                dao.update(dto);
+                boolean b = customerBO.updateCustomer(dto);
 
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to update the customer " + id + e.getMessage()).show();
@@ -187,25 +190,11 @@ public class ManageCustomersFormController {
         }
 
         btnAddNewCustomer.fire();
-
-        /*String id = getLastCustomerId();
-        System.out.println("Old Id : "+id);
-        // id = C00-001
-        String[] ar = id.split("-");
-        int i = Integer.parseInt(ar[1]);
-        i++;
-        String finalId=null;
-        if(i<10){
-            finalId = "C00-00" + i;
-        }
-        System.out.println("New Id : "+finalId);*/
     }
 
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        return dao.IsExist(id);
-        /* This is a comment */
-
+        return customerBO.customerIsExists(id);
     }
 
 
@@ -216,7 +205,8 @@ public class ManageCustomersFormController {
             if (!existCustomer(id)) {
                 new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
             }
-            dao.delete(id);
+
+           customerBO.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
             tblCustomers.getSelectionModel().clearSelection();
@@ -231,14 +221,13 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-            return dao.generateNewId();
+            return customerBO.generateNewCustomerId();
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
 
         if (tblCustomers.getItems().isEmpty()) {
             return "C00-001";
