@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface CrudDAO <T,Id>{   //Generic Interface
+public interface CrudDAO <T,Id> extends SuperDAO{   //Generic Interface
     ArrayList<T> getAll() throws SQLException, ClassNotFoundException;
 
     boolean save(T dto) throws SQLException, ClassNotFoundException;

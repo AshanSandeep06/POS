@@ -1,14 +1,21 @@
-public class Test {
-    public static void main(String[] args){
-        run("SELECT * FROM Customer","1001","Ashan",21);
-    }
+import dao.DAOFactory;
+import dao.custom.CustomerDAO;
+import dao.custom.ItemDAO;
 
-    // Object type Var-args
-    // Optional Parameters
-    private static void run(String sql, Object... params) {
-        System.out.println(sql);
-        for (Object param : params) {
-            System.out.println(param);
+import java.sql.SQLException;
+
+public class Test {
+    public static void main(String[] args) {
+
+        ItemDAO itemDAO = (ItemDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+
+        try {
+            System.out.println(itemDAO.generateNewId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+
     }
 }

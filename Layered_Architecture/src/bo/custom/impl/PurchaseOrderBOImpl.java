@@ -1,5 +1,7 @@
-package bo;
+package bo.custom.impl;
 
+import bo.custom.PurchaseOrderBO;
+import dao.DAOFactory;
 import dao.custom.CustomerDAO;
 import dao.custom.ItemDAO;
 import dao.custom.OrderDAO;
@@ -9,7 +11,10 @@ import dao.custom.impl.ItemDAOImpl;
 import dao.custom.impl.OrderDAOImpl;
 import dao.custom.impl.OrderDetailDAOImpl;
 import db.DBConnection;
-import model.*;
+import model.CustomerDTO;
+import model.ItemDTO;
+import model.OrderDTO;
+import model.OrderDetailDTO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,8 +22,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseOrderBOImpl implements PurchaseOrderBO{
+public class PurchaseOrderBOImpl implements PurchaseOrderBO {
 
+    // Exposed the object creation logic -----------------
     CustomerDAO customerDAO = new CustomerDAOImpl();
     ItemDAO itemDAO = new ItemDAOImpl();
     OrderDAO orderDAO = new OrderDAOImpl();
@@ -26,6 +32,13 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO{
 
     @Override
     public boolean purchaseOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException, ClassNotFoundException {
+
+        //CustomerDAO customerDAO = new CustomerDAOImpl();
+
+        CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+
+
+
         /*Transaction*/
         Connection connection = null;
         connection = DBConnection.getDbConnection().getConnection();
