@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ItemBOImpl implements ItemBO {
     // Property Injection
     ItemDAO itemDAO = (ItemDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ITEM);
-
+    // Hiding the object creation logic using DAOFactory class with Factory design pattern
 
     @Override
     public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {
