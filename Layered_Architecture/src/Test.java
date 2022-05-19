@@ -1,15 +1,19 @@
 import dao.CrudDAO;
-import dao.DAOFactory;
-import dao.custom.CustomerDAO;
-import dao.custom.ItemDAO;
+import dao.custom.impl.CustomerDAOImpl;
+import dto.CustomerDTO;
 
 import java.sql.SQLException;
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        //CrudDAO crudDAO = (CrudDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+        CrudDAO c1 = new CustomerDAOImpl();
+        c1.save("Ashan");
 
-        CrudDAO queryDAO = (CrudDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.JOINQUERYDAO);
+
+        CrudDAO<CustomerDTO,String> c2 = new CustomerDAOImpl();
+        c2.save(new CustomerDTO());
+
+
     }
 }

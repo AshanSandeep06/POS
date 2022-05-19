@@ -1,21 +1,15 @@
-package model;
+package entity;
 
-import java.io.Serializable;
-
-/**
- * @author : Sanu Vithanage
- * @since : 0.1.0
- **/
-
-public class CustomerDTO implements Serializable {
+public class Customer {
     private String id;
     private String name;
     private String address;
 
-    public CustomerDTO() {
+    public Customer() {
+
     }
 
-    public CustomerDTO(String id, String name, String address) {
+    public Customer(String id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -43,14 +37,5 @@ public class CustomerDTO implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerDTO{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
     }
 }

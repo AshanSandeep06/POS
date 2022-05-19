@@ -1,23 +1,18 @@
-package model;
+package entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * @author : Sanu Vithanage
- * @since : 0.1.0
- **/
-
-public class ItemDTO implements Serializable {
+public class Item {
     private String code;
     private String description;
     private BigDecimal unitPrice;
     private int qtyOnHand;
 
-    public ItemDTO() {
+    public Item() {
+
     }
 
-    public ItemDTO(String code, String description, BigDecimal unitPrice, int qtyOnHand) {
+    public Item(String code, String description, BigDecimal unitPrice, int qtyOnHand) {
         this.code = code;
         this.description = description;
         this.unitPrice = unitPrice;
@@ -54,15 +49,5 @@ public class ItemDTO implements Serializable {
 
     public void setQtyOnHand(int qtyOnHand) {
         this.qtyOnHand = qtyOnHand;
-    }
-
-    @Override
-    public String toString() {
-        return "ItemTM{" +
-                "code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", unitPrice=" + unitPrice +
-                ", qtyOnHand=" + qtyOnHand +
-                '}';
     }
 }

@@ -1,16 +1,13 @@
 package bo.custom.impl;
 
 import bo.custom.PurchaseOrderBO;
-import dao.CrudDAO;
 import dao.DAOFactory;
-import dao.SuperDAO;
 import dao.custom.*;
-import dao.custom.impl.*;
 import db.DBConnection;
-import model.CustomerDTO;
-import model.ItemDTO;
-import model.OrderDTO;
-import model.OrderDetailDTO;
+import dto.CustomerDTO;
+import dto.ItemDTO;
+import dto.OrderDTO;
+import dto.OrderDetailDTO;
 
 import java.sql.Connection;
 import java.sql.SQLException;

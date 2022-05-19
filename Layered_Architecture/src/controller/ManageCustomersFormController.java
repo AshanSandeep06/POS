@@ -2,7 +2,6 @@ package controller;
 
 import bo.BOFactory;
 import bo.custom.CustomerBO;
-import bo.custom.impl.CustomerBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
@@ -17,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerDTO;
+import dto.CustomerDTO;
 import view.tdm.CustomerTM;
 
 import java.io.IOException;
